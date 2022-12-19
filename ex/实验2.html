@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: lavender;
+        }
+
+        .box {
+            position: relative;
+        }
+
+
+        .bg1 {
+            position: relative;
+            bottom: -300px;
+            z-index: 1;
+            height: 336px;
+            background: url(res/bg1.png) no-repeat;
+            animation: bg 80s 3s infinite linear;
+        }
+
+
+        .bg2 {
+            transform: translate(0, -192px);
+            opacity: .1;
+            height: 569px;
+            background: url(res/bg2.png) no-repeat;
+            animation: bg 80s 3s infinite linear;
+            animation-iteration-count:1;
+        }
+
+        @keyframes bg {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -1600px 0;
+            }
+        }
+
+        .bear {
+            position: absolute;
+            bottom: 270px;
+            left: 0;
+            z-index: 2;
+            /* bear 宽 1600 ，有 8 个动作，所以每个动作宽 200 */
+            width: 200px;
+            height: 100px;
+            background: url(res/bear.png) no-repeat;
+            /* 同时调用多个动画，用逗号隔开 */
+            animation: bear .8s steps(8) infinite, left 3s linear forwards;
+        }
+
+        @keyframes bear {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                /* 图片往左走，是负值 */
+                background-position: -1600px 0;
+            }
+        }
+
+        @keyframes left {
+            0% {
+                left: 0;
+            }
+
+            100% {
+                /* 父元素的一半 */
+                left: 50%;
+                /* 再往回走自身的一半 */
+                transform: translate(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="bg1"></div>
+        <div class="bg2"></div>
+        <div class="bear"></div>
+    </div>
+</body>
+
+</html>
